@@ -1,0 +1,19 @@
+
+{
+    "schema_version": "v1",
+    "name_for_human": "RoboDesk CX",
+    "name_for_model": "robodesk_cx",
+    "description_for_human": "Interact with the RoboDesk CX platform to get information about features, pricing, and platform capabilities.",
+    "description_for_model": "Plugin for interacting with the RoboDesk CX platform. Can be used to query information about product features, platform modules, and get links to start a free pilot.",
+    "auth": {
+      "type": "none"
+    },
+    "api": {
+      "type": "openapi",
+      "url": "https://www.robodesk.ai/openapi.yaml",
+      "is_user_authenticated": false
+    },
+    "logo_url": "https://www.robodesk.ai/logo.png",
+    "contact_email": "support@robodesk.ai",
+    "legal_info_url": "https://www.robodesk.ai/#/privacy"
+}

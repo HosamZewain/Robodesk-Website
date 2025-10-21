@@ -1,0 +1,55 @@
+
+openapi: 3.0.1
+info:
+  title: RoboDesk CX API
+  description: An API for getting information about the RoboDesk Customer Experience Platform.
+  version: v1
+servers:
+  - url: https://api.robodesk.ai
+paths:
+  /features:
+    get:
+      operationId: getFeatures
+      summary: Get a list of RoboDesk features.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  features:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the feature.
+                        description:
+                          type: string
+                          description: A brief description of the feature.
+  /modules:
+    get:
+      operationId: getModules
+      summary: Get a list of RoboDesk platform modules.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  modules:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          description: The name of the module.
+                        description:
+                          type: string
+                          description: A brief description of the module.
