@@ -1,0 +1,52 @@
+name: Build & Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install deps (no lockfile)
+        run: npm install --no-audit --fund=false
+
+      - name: Build
+        run: npm run build
+
+      - name: Detect output dir (dist | build)
+        run: |
+          if [ -d dist ]; then echo "OUTPUT_DIR=dist" >> $GITHUB_ENV;
+          elif [ -d build ]; then echo "OUTPUT_DIR=build" >> $GITHUB_ENV;
+          else echo "❌ No dist/build folder found"; exit 1; fi
+
+      - name: SPA 404 fallback
+        run: cp ${{ env.OUTPUT_DIR }}/index.html ${{ env.OUTPUT_DIR }}/404.html
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ${{ env.OUTPUT_DIR }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
