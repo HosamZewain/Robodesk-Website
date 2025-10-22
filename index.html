@@ -32,6 +32,9 @@
     </script>
     <!-- End Google Tag Manager -->
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         font-family: 'Inter', sans-serif;
       }
@@ -54,6 +57,20 @@
 </script>
 </head>
   <body>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "RoboDesk",
+      "url": "https://www.robodesk.ai/",
+      "logo": "https://www.robodesk.ai/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-800-555-ROBO",
+        "contactType": "customer service"
+      }
+    }
+    </script>
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
     <!-- Google Tag Manager (noscript) -->

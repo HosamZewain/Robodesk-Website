@@ -21,9 +21,9 @@ export const submitToTeams = async (data: PilotRequestData): Promise<void> => {
         "@type": "MessageCard",
         "@context": "http://schema.org/extensions",
         "themeColor": "ff6a00",
-        "summary": `New Pilot Request from ${data.company}`,
+        "summary": `New Demo Request from ${data.company}`,
         "sections": [{
-            "activityTitle": `🚀 New Free Pilot Request!`,
+            "activityTitle": `🚀 New Demo Request!`,
             "activitySubtitle": `From ${data.name} at ${data.company}`,
             "facts": [
                 { "name": "Company", "value": data.company },

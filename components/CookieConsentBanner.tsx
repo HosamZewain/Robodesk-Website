@@ -1,7 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 
 const COOKIE_CONSENT_KEY = 'robodesk_cookie_consent';
+
+type Language = 'en' | 'ar';
+
+interface CookieConsentBannerProps {
+    language: Language;
+    setLanguage: (lang: Language) => void;
+}
 
 const content = {
   en: {
@@ -16,9 +22,8 @@ const content = {
   }
 };
 
-const CookieConsentBanner: React.FC = () => {
+const CookieConsentBanner: React.FC<CookieConsentBannerProps> = ({ language, setLanguage }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [language, setLanguage] = useState<'en' | 'ar'>('en');
 
   useEffect(() => {
     const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
@@ -47,7 +52,8 @@ const CookieConsentBanner: React.FC = () => {
         <div className="p-4 rounded-lg bg-gray-800 text-white shadow-lg sm:p-6 flex items-center justify-between flex-wrap gap-4">
           <p className="flex-1 font-medium text-sm">{currentContent.message}</p>
           <div className="flex-shrink-0 flex items-center gap-4">
-             <button onClick={() => setLanguage(lang => lang === 'en' ? 'ar' : 'en')} className="text-xs font-semibold hover:underline">
+             {/* FIX: The setLanguage prop expects a value, not an updater function. This corrects the onClick handler to pass the new language value directly. */}
+             <button onClick={() => setLanguage(language === 'en' ? 'ar' : 'en')} className="text-xs font-semibold hover:underline">
               {language === 'en' ? 'العربية' : 'English'}
             </button>
             <button onClick={() => handleConsent('declined')} className="px-4 py-2 rounded-md text-sm font-medium bg-gray-600 hover:bg-gray-500">
